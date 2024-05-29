@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management</title>
+    <link rel="stylesheet" href="./static/css/tasks_style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/"><i class="fas fa-home"></i> Home</a>
+        {% if session_logged_in %}
+            <a href="/employees"><i class="fas fa-users"></i> Employees</a>
+            <a href="/tasks"><i class="fas fa-tasks"></i> Tasks</a>
+            <a href="/projects"><i class="fas fa-briefcase"></i> Projects</a>
+            <a href="/calendar"><i class="fas fa-calendar-alt"></i> Calendar</a>
+            <a href="/translate"><i class="fas fa-language"></i> Translation Tool</a>
+            <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        {% else %}
+            <a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="/signup"><i class="fas fa-sign-in-alt"></i> Signup</a>
+        {% endif %}
+    </div>
+
+    <div class="content">
+        <!-- Add Task Form -->
+        <section>
+            <form action="/inserttask" method="POST">
+                <h2>Add New Task</h2>
+                <label for="tname">Task Name:</label>
+                <input type="text" id="tname" name="tname" required><br>
+                <label for="essns">Employee SSN (comma-separated):</label>
+                <input type="text" id="essns" name="essns" required><br>
+                <label for="deadline">Deadline:</label>
+                <input type="text" id="deadline" name="deadline" required><br>
+                <label for="description">Description:</label><br>
+                <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
+                <label for="total_hours">Total Hours:</label><br>
+                <input type="text" id="total_hours" name="total_hours" required><br>
+                <label for="requited_hours">Required Hours:</label><br>
+                <input type="text" id="requited_hours" name="requited_hours" required><br>
+                <input type="submit" value="Add Task">
+            </form>
+        </section>
+        {% if not insert_task_success %}
+            <span style="font-size: 15px;color:red" >Something went wrong! Please enter valid fields! </span> 
+        {% endif %}
+        <!-- Task Table -->
+        <section>
+            <h2>Task List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Employee SSN</th>
+                        <th>Deadline</th>
+                        <th>Description</th>
+                        <th>Total Hours</th>
+                        <th>Required Hours</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in tasks %}
+                    <tr>
+                        <td>{{ task[0] }}</td>
+                        <td>{{ task[1] }}</td>
+                        <td>{{ task[2] }}</td>
+                        <td>{{ task[3] }}</td>
+                        <td>{{ task[4] }}</td>
+                        <td>{{ task[5] }}</td>
+                        <td>
+                            <!-- Create a form for deleting the task -->
+                            <form action="/delete_task" method="POST">
+                                <!-- Include hidden input fields for task details -->
+                                <input type="hidden" name="tname" value="{{ task[0] }}">
+                                <input type="hidden" name="essn" value="{{ task[1] }}">
+                                <input type="hidden" name="deadline" value="{{ task[2] }}">
+                                <input type="submit" value="x">
+                                <!-- Add a delete button -->
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h1>Updating Employees Task Hours</h1>
+            <form action="update_task_hours" method="POST">
+                <label for="ssn">Employee SSN:</label>
+                <input type="text" id="ssn" name="ssn" required><br>
+                <label for="tname">Task Name:</label>
+                <input type="text" id="tname" name="tname" required><br>
+                <label for="total_hours">Total Hours:</label>
+                <input type="number" id="total_hours" name="total_hours" required><br>
+                <input type="submit" value="Update">
+            </form>
+            <br /> 
+        </section>
+        {% if not update_task_success %}
+            <span style="font-size: 15px;color:red" >Something went wrong! Please enter valid fields! </span> 
+        {% endif %} <br/> <br/> 
+    </div>
+    <br /> <br /> 
+</body>
+</html>

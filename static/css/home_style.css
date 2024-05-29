@@ -1,0 +1,97 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #f4f4f9; 
+    overflow-x: hidden;
+    padding-top: 20px;
+    transition: 0.5s;
+}
+
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #5c67f2; 
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.sidebar a i {
+    margin-right: 10px; 
+}
+
+.sidebar a:hover {
+    background-color: #f0f0f0;
+}
+
+.content {
+    margin-left: 250px; 
+    padding: 20px;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-feature {
+    margin-top: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.feature-list, .user-stories {
+    list-style: none;
+    padding: 0;
+}
+
+.feature-list li, .user-stories li {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #555;
+}
+
+.feature-icon {
+    color: #5c67f2;
+    margin-right: 10px;
+}
+
+.user-icon {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: #5c67f2;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+}
+
+.story {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.story-text {
+    margin-left: 10px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    flex-grow: 1;
+}

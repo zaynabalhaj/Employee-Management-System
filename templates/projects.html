@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Management System</title>
+    <link rel="stylesheet" href="./static/css/tasks_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/"><i class="fas fa-home"></i> Home</a>
+        {% if session_logged_in %}
+            <a href="/employees"><i class="fas fa-users"></i> Employees</a>
+            <a href="/tasks"><i class="fas fa-tasks"></i> Tasks</a>
+            <a href="/projects"><i class="fas fa-briefcase"></i> Projects</a>
+            <a href="/calendar"><i class="fas fa-calendar-alt"></i> Calendar</a>
+            <a href="/translate"><i class="fas fa-language"></i> Translation Tool</a>
+            <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        {% else %}
+            <a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="/signup"><i class="fas fa-sign-in-alt"></i> Signup</a>
+        {% endif %}
+    </div>
+    <div class="content">
+        <h1>Project Management System</h1>
+        <h2>Add New Project</h2>
+
+        <form action="insertEprojects" method="POST">
+            <label for="pname">Project Name:</label><br>
+            <input type="text" id="pname" name="pname" required><br>
+            <label for="pno">Project Number:</label><br>
+            <input type="text" id="pno" name="pno" required><br>
+            <label for="location">Location:</label><br>
+            <input type="text" id="location" name="location" required><br>
+            <label for="deadline">Deadline:</label><br>
+            <input type="date" id="deadline" name="deadline" required><br>
+            <label for="budget">Budget:</label><br>
+            <input type="text" id="budget" name="budget" required><br>
+            <label for="department">Department:</label><br>
+            <input type="text" id="department" name="department" required><br><br>
+        <label for="skills">Skills (comma-separated):</label><br>
+            <input type="text" id="skills" name="skills" required><br><br>
+            <input type="submit" value="Submit">
+        </form>
+
+        <hr>
+        <h2>Match Skills</h2>
+        <form action="/matching" method="post">
+            <label for="skills">Skills (comma-separated):</label><br>
+            <input type="text" id="skills" name="skills"><br><br>
+            <input type="submit" value="Match Skills">
+        </form>
+        <hr>
+        <h2>Results</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Employee SSN</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if employees %}
+                    {% for employee in employees %}
+                        <tr>
+                            <td>{{ employee[0] }}</td>
+                            <td>{{ employee[1] }}</td>
+                            <td>{{ employee[2] }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="3">No employees found with matching skills</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+
+        <h2>Select Employees for Project</h2>
+        <form action="/insert_employee_project" method="post">
+            <label for="pnum">Project Number:</label><br>
+            <input type="text" id="pnum" name="pnum"><br>
+            <label for="selected">Selected Employees (comma-separated SSNs):</label><br>
+            <input type="text" id="selected" name="selected"><br><br>
+            <input type="submit" value="Add Employees">
+        </form>
+        {% if not add_emp_success %}
+                <span style="font-size: 15px;color:red" >Something went wrong! Please enter valid fields! </span> 
+        {% endif %}
+
+        <!-- Employee Projects Table -->
+        <h2>Employee Projects</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Project Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emproject in emprojects %}
+                <tr>
+                    <td>{{ emproject[0] }}</td>
+                    <td>{{ emproject[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br/> <br/>
+        <!-- Button to Navigate to Reports Page -->
+        <form action="/report_page" method="POST">
+            <input type="submit" value="Go to Sustainability Data Page">
+        </form>
+        <br/> <br/> 
+
+        <form action="/progress" method="POST">
+            <input type="submit" value="Go to Reports Page">
+        </form>
+        <br/> <br/> 
+    
+    </div>
+</body>
+</html>

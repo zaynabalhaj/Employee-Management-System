@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./static/css/login_signup_style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post" action="/login" class="input-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" class="input-field"><br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" class="input-field"><br><br>
+            <input type="submit" value="Login" class="submit-button">
+        </form>
+        <p>Don't have an account? <a href="/signup" class="link">Sign Up</a></p>
+
+        {% if login_failed %}
+        <span style="font-size: 15px;color:red" > Your Username or Password is incorrect. Please try again! </span> 
+        {% endif %}
+    </div>
+</body>
+</html>

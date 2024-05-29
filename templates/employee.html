@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+    <link rel="stylesheet" href="./static/css/tasks_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/"><i class="fas fa-home"></i> Home</a>
+        {% if session_logged_in %}
+            <a href="/employee"><i class="fas fa-tasks"></i> Main Dashboard</a>
+            <a href="/calendar"><i class="fas fa-calendar-alt"></i> Calendar</a>
+            <a href="/translate"><i class="fas fa-language"></i> Translation Tool</a>
+            <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        {% else %}
+            <a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="/signup"><i class="fas fa-sign-in-alt"></i> Signup</a>
+        {% endif %}
+    </div>
+    <div class="content">
+        <h1>Employee Management System</h1>
+        <!-- Task Table -->
+        <h2>Task List</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Task Name</th>
+                    <th>Employee SSN</th>
+                    <th>Deadline</th>
+                    <th>Description</th>
+                    <th>Total Hours</th>
+                    <th>Required_hours</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task[0] }}</td>
+                    <td>{{ task[1] }}</td>
+                    <td>{{ task[2] }}</td>
+                    <td>{{ task[3] }}</td>
+                    <td>{{ task[4] }}</td>
+                    <td>{{ task[5] }}</td>
+                    <td>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+
+        <!-- Employee Skills Table -->
+        <h2>Employee Skills</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Employee Skill</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for empskill in empskills %}
+                <tr>
+                    <td>{{ empskill[0] }}</td>
+                    <td>{{ empskill[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Employee Projects Table -->
+        <h2>Employee Projects</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Project Number</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emproject in emprojects %}
+                <tr>
+                    <td>{{ emproject[0] }}</td>
+                    <td>{{ emproject[1] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <!-- Employee Projects Table -->
+        <h2>Log Work Hours</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee ID</th>
+                    <th>Total Hours</th>
+                    <th>Working Date</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for employee_workdate in employee_workdate %}
+                <tr>
+                    <td>{{ employee_workdate[0] }}</td>
+                    <td>{{ employee_workdate[1] }}</td>
+                    <td>{{ employee_workdate[2] }}</td>
+        
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <br/> <br/> 
+        <!-- Button to Navigate to Reports Page -->
+        <form action="/report_page" method="POST">
+        <input type="submit" value="Go to Sustainability Data Page">
+        </form>
+        
+        <br/> <br/> 
+        <form action="/progress" method="POST">
+            <input type="submit" value="Go to Reports Page">
+        </form>
+        
+    </div>
+
+</body>
+</html>

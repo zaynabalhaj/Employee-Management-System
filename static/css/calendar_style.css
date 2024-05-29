@@ -1,0 +1,33 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.calendar-container {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 840px; /* slightly wider than the iframe to accommodate padding */
+}
+
+h1 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+iframe {
+    display: block; /* ensures no extra space below iframe */
+    width: 800px; /* as specified */
+    height: 600px; /* as specified */
+    border: none; /* removes the border */
+    border-radius: 4px; /* rounds corners of the iframe */
+    overflow: hidden; /* ensures no scrollbars appear if not needed */
+}

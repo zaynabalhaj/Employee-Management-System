@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation Tool</title>
+    <link rel="stylesheet" href="./static/css/translation_style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/"><i class="fas fa-home"></i> Home</a>
+        {% if session_logged_in and isManager %}
+            <a href="/employees"><i class="fas fa-users"></i> Employees</a>
+            <a href="/tasks"><i class="fas fa-tasks"></i> Tasks</a>
+            <a href="/projects"><i class="fas fa-briefcase"></i> Projects</a>
+            <a href="/calendar"><i class="fas fa-calendar-alt"></i> Calendar</a>
+            <a href="/translate"><i class="fas fa-language"></i> Translation Tool</a>
+            <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        {% elif session_logged_in %}
+            <a href="/employee"><i class="fas fa-tasks"></i> Main Dashboard</a>
+            <a href="/calendar"><i class="fas fa-calendar-alt"></i> Calendar</a>
+            <a href="/translate"><i class="fas fa-language"></i> Translation Tool</a>
+            <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        {% else %}
+            <a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="/signup"><i class="fas fa-sign-in-alt"></i> Signup</a>
+        {% endif %}
+    </div>
+    <div class="content"> 
+        <h1> Translate to Arabic </h1>
+        <h2>Upload File <span style="font-size: 10px;"> (.txt files only) </span></h2> 
+        <form action="/upload-file" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" required>
+            <button type="submit">Upload File</button>
+        </form>
+        {% if download_ready %}
+        <a href="/download">Download Document</a>
+        {% endif %}
+
+        <h2>Submit Text</h2>
+        <form action="/submit-text" method="post">
+            <textarea name="text" rows="4" required placeholder="Enter text here..."></textarea>
+            <button type="submit">Submit Text</button>
+        </form>
+
+        {% if translated %}
+        <div class="translation-box">
+            <h3>Translated Text:</h3>
+            <p>{{translated}}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

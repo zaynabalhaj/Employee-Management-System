@@ -1,0 +1,86 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+.sidebar {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #f4f4f9; 
+    overflow-x: hidden;
+    padding-top: 20px;
+    transition: 0.5s;
+}
+
+.sidebar a {
+    padding: 10px 15px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #5c67f2; 
+    display: flex;
+    align-items: center;
+    transition: 0.3s;
+}
+
+.sidebar a i {
+    margin-right: 10px; 
+}
+
+.sidebar a:hover {
+    background-color: #f0f0f0;
+}
+
+.content {
+    margin-left: 250px; 
+    padding: 20px;
+    height: 100%;
+    background-color: #ffffff;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="submit"] {
+    background-color: #5c67f2;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+input[type="submit"]:hover {
+    background-color: #4a54e1;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Google Calendar</title>
+    <link rel="stylesheet" href="./static/css/home_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./static/css/calendar_style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/"><i class="fas fa-home"></i> Home</a>
+        {% if session_logged_in and isManager %}
+        <a href="/employees"><i class="fas fa-users"></i> Employees</a>
+        <a href="/tasks"><i class="fas fa-tasks"></i> Tasks</a>
+        <a href="/projects"><i class="fas fa-briefcase"></i> Projects</a>
+        <a href="/calendar"><i class="fas fa-calendar-alt"></i> Calendar</a>
+        <a href="/translate"><i class="fas fa-language"></i> Translation Tool</a>
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        {% elif session_logged_in %}
+            <a href="/employee"><i class="fas fa-tasks"></i> Main Dashboard</a>
+            <a href="/calendar"><i class="fas fa-calendar-alt"></i> Calendar</a>
+            <a href="/translate"><i class="fas fa-language"></i> Translation Tool</a>
+            <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        {% else %}
+            <a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="/signup"><i class="fas fa-sign-in-alt"></i> Signup</a>
+        {% endif %}
+    </div>
+    <div class="content">
+        <div class="calendar-container">
+            <h1>Company Calendar</h1>
+            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FBeirut&bgcolor=%23ffffff&src=YWMzNDQ2NDY5ZjQzNjkwZDYyNGQ0Njk3Y2QwMmYxYzZhYzM0OWJjMDUxODNiYjhmYWM0M2M4OTc2MGFiNTQ2ZUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4ubGIjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23A79B8E&color=%230B8043" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+        </div>
+    </div>
+</body>
+</html>

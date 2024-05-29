@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Report</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-jP5FRa0hPf5goDDcsTPGsUOWALeH4sYX4Vmnb5kLZ4Em57ph3BgKOwqks7E7VsqTlqkR+f1ml5Q/LXKONcJn9g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="./static/css/sus_report_style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Project Report</h1>
+        </header>
+
+        <section class="section">
+            <h2>Average Salary per Department</h2>
+            <div>
+                <img src="data:image/png;base64,{{ plot_data_bar }}" alt="Average Salary per Department">
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Percentage of Females per Department</h2>
+            <div>
+                <img src="data:image/png;base64,{{ plot_data_pie }}" alt="Percentage of Females per Department">
+            </div>
+        </section>
+
+        <!-- Additional sections and details can be added here -->
+        <section class="section">
+            <h2>Gender Distribution among departments</h2>
+            <div>
+                <img src="data:image/png;base64,{{ plot_data }}" alt="Gender Distribution among departments">
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Rate the Project</h2>
+            <form action="/submit_rating" method="post">
+                <input type="text" name="ssn" placeholder="Enter SSN"><br><br>
+                <input type="number" name="pnumber" placeholder="Enter Project ID"><br><br>
+                <div class="rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2"><i class="fas fa-star"></i></label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1"><i class="fas fa-star"></i></label>
+                </div>
+                <br><br>
+                <button type="submit">Submit Rating</button>
+            </form>
+            {% if not rating_success %}
+            <span style="font-size: 15px;color:red" >Something went wrong! Please enter valid fields! </span> 
+            {% endif %}
+        </section>
+    </div>
+</body>
+</html>

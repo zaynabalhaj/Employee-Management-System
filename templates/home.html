@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System</title>
+    <link rel="stylesheet" href="./static/css/home_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <a href="/"><i class="fas fa-home"></i> Home</a>
+        {% if session_logged_in and isManager %}
+            <a href="/employees"><i class="fas fa-users"></i> Employees</a>
+            <a href="/tasks"><i class="fas fa-tasks"></i> Tasks</a>
+            <a href="/projects"><i class="fas fa-briefcase"></i> Projects</a>
+            <a href="/calendar"><i class="fas fa-calendar-alt"></i> Calendar</a>
+            <a href="/translate"><i class="fas fa-language"></i> Translation Tool</a>
+            <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        {% elif session_logged_in %}
+            <a href="/employee"><i class="fas fa-tasks"></i> Main Dashboard</a>
+            <a href="/calendar"><i class="fas fa-calendar-alt"></i> Calendar</a>
+            <a href="/translate"><i class="fas fa-language"></i> Translation Tool</a>
+            <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        {% else %}
+            <a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+            <a href="/signup"><i class="fas fa-sign-in-alt"></i> Signup</a>
+        {% endif %}
+    </div>
+    <div class="content">
+        <h1>Welcome to the Employee Management System</h1>
+        <p class="main-feature">Designed to enhance work efficiency and streamline your operations.</p>
+        <ul class="feature-list">
+            <li><i class="fas fa-tasks feature-icon"></i>Assign and track tasks easily.</li>
+            <li><i class="fas fa-users feature-icon"></i>Manage employee profiles and roles.</li>
+            <li><i class="fas fa-chart-bar feature-icon"></i>View detailed reports on team performance.</li>
+            <li><i class="fas fa-language feature-icon"></i>Utilize the translation tool for global communication.</li>
+        </ul>
+        <h2>User Stories</h2>
+        <ul class="user-stories">
+            <li class="story">
+                <div class="user-icon"><i class="fas fa-user"></i></div>
+                <div class="story-text">As a manager, I want to match the skills of employees to projects so that I can efficiently assign resources and enhance project outcomes.</div>
+            </li>
+            <li class="story">
+                <div class="user-icon"><i class="fas fa-user"></i></div>
+                <div class="story-text">As a manager, I want to view my supervisees' progress so that I can monitor project timelines and provide necessary support.</div>
+            </li>
+            <li class="story">
+                <div class="user-icon"><i class="fas fa-user"></i></div>
+                <div class="story-text">As an employee, I want to see my own progress so that I can understand my contributions to the project and identify areas for self-improvement.</div>
+            </li>
+            <li class="story">
+                <div class="user-icon"><i class="fas fa-user"></i></div>
+                <div class="story-text">As an employee or manager, I want to be able to translate content to Arabic for better communication among team members who are native Arabic speakers.</div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

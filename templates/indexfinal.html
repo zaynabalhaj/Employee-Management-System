@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>Employee Management System</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./static/css/tasks_style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    <body>
+        <div class="sidebar">
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+            {% if session_logged_in %}
+                <a href="/employees"><i class="fas fa-users"></i> Employees</a>
+                <a href="/tasks"><i class="fas fa-tasks"></i> Tasks</a>
+                <a href="/projects"><i class="fas fa-briefcase"></i> Projects</a>
+                <a href="/calendar"><i class="fas fa-calendar-alt"></i> Calendar</a>
+                <a href="/translate"><i class="fas fa-language"></i> Translation Tool</a>
+                <a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            {% else %}
+                <a href="/login"><i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="/signup"><i class="fas fa-sign-in-alt"></i> Signup</a>
+            {% endif %}
+        </div>
+        <div class="content">
+            <h1>Employee Management System</h1>
+            
+            <!-- Employee Insert Form -->
+            <form action="/insertemployee" method="POST">
+                <h2>Add New Employee</h2>
+                <label for="ssn">ID:</label>
+                <input type="text" id="ssn" name="ssn" required><br>
+                <label for="fname">First Name:</label>
+                <input type="text" id="fname" name="fname" required><br>
+                <label for="minit">Middle Initial:</label>
+                <input type="text" id="minit" name="minit"><br>
+                <label for="lname">Last Name:</label>
+                <input type="text" id="lname" name="lname" required><br>
+                <label for="salary">Salary:</label>
+                <input type="text" id="salary" name="salary" required><br>
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required><br>
+                <label for="attendance">Attendance:</label>
+                <input type="text" id="attendance" name="attendance" required><br>
+                <label for="dno">Department number:</label>
+                <input type="text" id="dno" name="dno" required><br>
+                <label for="sex">Gender:</label>
+                <input type="text" id="sex" name="sex" required><br>
+                <label for="super_ssn">Supervisor SSN:</label>
+                <input type="text" id="super_ssn" name="super_ssn"><br>
+                <label for="life_cycle">Life cycle:</label>
+                <input type="text" id="life_cycle" name="life_cycle"><br>
+                <label for="position">Position:</label>
+                <input type="text" id="position" name="position" required><br>
+                <input type="submit" value="Add Employee">
+            </form>
+            {% if insert_not_successfull %}
+            <span style="font-size: 15px;color:red" >Something went wrong! Please enter Valid Fields! </span> 
+            {% endif %}
+            <!-- Employee Table -->
+            <h2>Employee List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Middle Initial</th>
+                        <th>Last Name</th>
+                        <th>Employee ID</th>
+                        <th>Address</th>
+                        <th>Gender</th>
+                        <th>Salary</th>
+                        <th>Supervisor SSN</th>
+                        <th>Department Number</th>
+                        <th>Attendance</th>
+                        <th>Life cycle</th>
+                        <th>Position</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in employees %}
+                    <tr>
+                        <td>{{ employee[0] }}</td>
+                        <td>{{ employee[1] }}</td>
+                        <td>{{ employee[2] }}</td>
+                        <td>{{ employee[3] }}</td>
+                        <td>{{ employee[4] }}</td>
+                        <td>{{ employee[5] }}</td>
+                        <td>{{ employee[6] }}</td>
+                        <td>{{ employee[7] }}</td>
+                        <td>{{ employee[8] }}</td>
+                        <td>{{ employee[9] }}</td>
+                        <td>{{ employee[10] }}</td>
+                        <td>{{ employee[11] }}</td>
+                        <td> <!-- Action column -->
+                            <form action="/delete_employee" method="POST">
+                                <input type="hidden" name="ssn" value="{{ employee[3] }}"> <!-- Hidden input to send SSN -->
+                                <input type="submit" value="x"> <!-- Submit button with 'x' label -->
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            
+            <!-- Add Employee Skills Form -->
+            <form action="/insertEskills" method="POST">
+                <h2>Add Employee Skills</h2>
+                <label for="essn">Employee ID:</label>
+                <input type="text" id="essn" name="essn" required><br>
+                <label for="skill">Employee Skills:</label>
+                <input type="text" id="skill" name="skill" required><br>
+                <input type="submit" value="Add Skills">
+            </form>
+            {% if not insert_new_empskill_success %}
+            <span style="font-size: 15px;color:red" >Something went wrong! Please enter Valid Fields! </span> 
+            {% endif %}
+            <!-- Employee Skills Table -->
+            <h2>Employee Skills</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Employee Skill</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for empskill in empskills %}
+                    <tr>
+                        <td>{{ empskill[0] }}</td>
+                        <td>{{ empskill[1] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+            <h1>Working_Hours Insertion for Employees</h1>
+            <form action="/log_work_hours" method="post">
+                <label for="ssn">Employee SSN:</label>
+                <input type="text" id="ssn" name="ssn" required><br>
+                <label for="work_date">Work Date:</label> <br/> 
+                <input type="date" id="work_date" name="work_date" required><br>
+                <label for="total_hours">Total Hours:</label>
+                <input type="number" id="total_hours" name="total_hours" required><br>
+                <input type="submit" value="Log Work Hours">
+            </form>
+            {% if not insert_log_hours_success %}
+                <span style="font-size: 15px;color:red" >Something went wrong! Please enter Valid Fields! </span> 
+            {% endif %}
+            <!-- Employee Projects Table -->
+            <h2>Log Work Hours</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Total Hours</th>
+                        <th>Working Date</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee_workdate in employee_workdate %}
+                    <tr>
+                        <td>{{ employee_workdate[0] }}</td>
+                        <td>{{ employee_workdate[1] }}</td>
+                        <td>{{ employee_workdate[2] }}</td>
+            
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <br/> <br/>
+    </div>
+
+</body>
+</html>
